@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from users import views as user_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # map to the cal folder urls.py
     path('',include('cal.urls')),
+    # map to the users folder urls.py
+    path('register/', user_views.register, name='register'),
 ]
