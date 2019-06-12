@@ -26,6 +26,11 @@ var currYear = new Date().getFullYear();
 createPage("calContainer",currMonth,currYear);
 //note that 3 = march, 1= jan
 
+// helper function for # of days in month
+function daysInMonth(m, y){
+    return new Date(y, m, 0).getDate();
+}
+
 //creates a new calendar in container.  "calContainer"
 function createPage(containerIn,m,y){
     var arr = ["January","February","March","April","May","June","July",
@@ -39,11 +44,10 @@ function createPage(containerIn,m,y){
     var tr2 = document.createElement('tr');
 
     //other variables
-    //var fDay = new Date(y,m,1).getDay();
     var fDay = new Date(y + "-" + m + "-01").getDay();
     var lDay = new Date(y,m,0).getDate();
     document.getElementById("stat2").innerHTML = 'Total number of days: '+lDay;
-    setLabels(arr[m-1],"xxx",y);
+    setLabels(arr[m-1],daysInMonth(m,y),y);
 
     var numCol = 0;
     var currRow = 1;
@@ -100,6 +104,7 @@ function createPage(containerIn,m,y){
 //sets the labels for mm, dd, yyyy
 function setLabels(m,d,y){
     document.getElementById("month-year").innerHTML = m+" "+y;
+    document.getElementById("stat2").innerHTML = "Total days: "+d; //DELETE
 }
 
 
@@ -145,11 +150,9 @@ function prev() {
     if(tmpTable){
         showCal(tmpTable.id);
     } else {
-        console.log("Creating calendar "+'table'+currMonth+'-'+currYear);
         createPage('calContainer',currMonth,currYear);
     }
-
-    setLabels(arr[currMonth-1],"xxxx",currYear);
+    setLabels(arr[currMonth-1],daysInMonth(currMonth,currYear),currYear);
 
 }
 
@@ -174,10 +177,9 @@ function nxt() {
     if(tmpTable){
         showCal(tmpTable.id);
     } else {
-        console.log("Creating calendar "+'table'+currMonth+'-'+currYear);
         createPage('calContainer',currMonth,currYear);
     }
-    setLabels(arr[currMonth-1],"xxxx",currYear);
+    setLabels(arr[currMonth-1],daysInMonth(currMonth,currYear),currYear);
 
 }
 
