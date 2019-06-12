@@ -3,6 +3,8 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from users import views as user_views
+# for static files
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,3 +18,5 @@ urlpatterns = [
     # map to profile
     path('profile/', user_views.profile, name='profile'),
 ]
+
+urlpatterns += staticfiles_urlpatterns()

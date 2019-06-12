@@ -1,11 +1,35 @@
 {% extends "cal/base.html" %}
-
+{% load static %}
 {% block content %}
-<h1>
-        Calendar
-</h1>
-    {% for saved in c_save %}
-        <h1>{{ saved.username}}</h1>
-        <h1>{{ saved.title}}</h1>
-    {% endfor %}
+    <body>
+        <!-- dynamically populated calendar -->
+        <div class="container-month-year w3-animate-top" id="container-month-year" >
+            <h1 id="month-year" style="margin:0; padding-top:2%;"></h1>
+            <button type="button" class="btnNav" id="prevMonth" onclick="prev()">Previous Month</button>
+            <button type="button" class="btnNav" id="nextMonth" onclick="nxt()">Next Month</button>
+        </div>
+
+        <div id = "calContainer" style="float: left;"></div>
+        <p id="stat">text</p>
+        <p id="stat1">text</p>
+        <p id="stat3">text</p>
+        <p id="stat4">text</p>
+        <h1 id="stat2">text2</h1>
+    
+
+        <!-- shift selection -->
+        <div id="left" style="padding-top:15%"></div>
+        <h1>Shift Types</h1>
+            <p> Shift Type 1 Title: 
+                <input type="text" id = "t1"> Time:
+                <input id="ts1" type="time"> to
+                <input id="te1" type="time">
+                <button type="button" class="btnShift" id="shift1" onclick="highlightShift('shift1')">Select Shift 1</button>
+            <br>Shift Type 2 Title: <input type="text"id = "t2"> Time:
+                <input id="ts2" type="time"> to
+                <input id="te2" type="time">          
+                <button type="button" class="btnShift" id="shift2" onclick="highlightShift('shift2')">Select Shift 2</button>
+            </p>
+    <script type="text/javascript" src="{% static 'cal/script.js' %}"></script>
+    </body>
 {% endblock content %}
