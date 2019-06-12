@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'cal/main.css' %}"">
+    <link rel="stylesheet" type="text/css" href="{% static 'cal/main.css' %}">
 
     <title>UpTwoDate</title>
 </head>
@@ -18,7 +18,7 @@
 <body>
     <header class="site-header">
     <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-        <div class="container">
+        <div class="container-fluid">
         <a class="navbar-brand mr-4" href="{% url 'calendar-home' %}">up2date</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,23 +27,24 @@
             <div class="navbar-nav mr-auto">
             <a class="nav-item nav-link" href="{% url 'calendar-home' %}">Home</a>
             <a class="nav-item nav-link" href="{% url 'calendar-about' %}">About</a>
-            </div>
+
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
-                    <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                     <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                    <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                 {% else %}
                     <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
                     <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
                 {% endif %}
+            </div>
             </div>
         </div>
         </div>
     </nav>
     </header>
 
-    <main role="main" class="container">
+    <main role="main" class="container-fluid">
     <div class="row">
         <div class="col-md-8">
         
@@ -57,36 +58,6 @@
         {% endif %}
 
         {% block content %}{% endblock %}
-        </div>
-        <div class="col-md-4">
-        <div class="content-section">
-            <h3>Saved Times</h3>
-            <p class='text-muted'>Add a new saved timepsan here.
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-light">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            Saved time 1:
-                        </div>
-                        <div>
-                            8:00 - 14:00
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item list-group-item-light">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            Saved time 2:
-                        </div>
-                        <div>
-                            9:00 - 15:00
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item list-group-item-light" >+ click to add a new time</li>
-            </ul>
-            </p>
-        </div>
         </div>
     </div>
     </main>

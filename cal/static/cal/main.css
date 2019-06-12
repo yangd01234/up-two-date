@@ -7,6 +7,13 @@ body {
   h1, h2, h3, h4, h5, h6 {
     color: #444444;
   }
+
+  .container1 h1 {
+    margin: 0
+  }
+  .container-month-year h1 {
+    margin: 0
+  }
   
   ul {
     margin: 0;
@@ -82,3 +89,146 @@ body {
   .account-heading {
     font-size: 2.5rem;
   }
+
+
+
+  table{
+    float:left;
+    border: 1px solid black;
+}
+h4{
+    float:left;
+    white-space: pre-line;
+}
+
+
+.btn {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    opacity: 0.4;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+#shift1{
+    background-color: royalblue;
+    border: none;
+    color: white;
+    padding: 3px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    opacity: 0.4;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+#shift2{
+    background-color: orange;
+    border: none;
+    color: white;
+    padding: 3px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    opacity: 0.4;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+#shift3{
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 3px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    opacity: 0.4;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+#shift4{
+    background-color: #00BF9D;
+    border: none;
+    color: white;
+    padding: 3px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    opacity: 0.4;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+#shift5{
+    background-color: #921DE0;
+    border: none;
+    color: white;
+    padding: 3px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    opacity: 0.4;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#shift1:hover {
+    opacity: 1
+}
+#shift2:hover {
+    opacity: 1
+}
+#shift3:hover {
+    opacity: 1
+}
+#shift4:hover {
+    opacity: 1
+}
+#shift5:hover {
+    opacity: 1
+}
+
+.btn:hover {
+    opacity: 1
+}
+
+
+
+.container1{
+    height: 100px;
+    width: 100%;
+}
+
+.container2{
+    height: 50px;
+    width: 100%;
+}
+
+.font-title{
+    font-size: 400%;
+    font-family: Lato;
+}
+@keyframes opac{from{opacity:0} to{opacity:1}}
+
+.w3-animate-right{position:relative;animation:animateright 0.7s}@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}
+.w3-animate-right2{position:relative;animation:animateright 0.8s}@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}
+.w3-animate-right3{position:relative;animation:animateright 1.2s}@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}
+.w3-animate-right4{position:relative;animation:animateright 1.6s}@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}
+.w3-animate-right5{position:relative;animation:animateright 2s}@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}
+
+.w3-animate-top{position:relative;animation:animatetop 1s, opac 1.8s}@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
