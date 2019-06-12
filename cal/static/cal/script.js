@@ -1,5 +1,4 @@
 
-console.log("this started");
 //NEW SCRIPT
 var list=new Array;
 var subject = new Array;
@@ -43,8 +42,11 @@ function createPage(containerIn,m,y){
     var tr = document.createElement('tr');
     var tr2 = document.createElement('tr');
 
-    //other variables
+    //if date is sunday (7) set to (0)
     var fDay = new Date(y + "-" + m + "-01").getDay();
+    if (fDay == 7){
+        fDay = 0;
+    }
     var lDay = new Date(y,m,0).getDate();
     document.getElementById("stat2").innerHTML = 'Total number of days: '+lDay;
     setLabels(arr[m-1],daysInMonth(m,y),y);
@@ -66,7 +68,7 @@ function createPage(containerIn,m,y){
 
 
     // create calendar table
-    for (i = 0; i < lDay+fDay; i++) {
+    for (i = 0; i < 42; i++) {
 
         var tmpId = y + "-" + m + "-" + (i-fDay+1);
         if (numCol > 6) {//create new rows if number of columns > 6
@@ -80,7 +82,10 @@ function createPage(containerIn,m,y){
         var day = document.createElement('td');
 
         //creates the blank days
-        if ((fDay) > i) {
+        if ((fDay > i)) {
+            day.textContent = 'Blank Days';
+            row.appendChild(day);
+        } else if (lDay+fDay-1 < i){
             day.textContent = 'Blank Days';
             row.appendChild(day);
         } else {//otherwise populates the days with a non blank
@@ -110,13 +115,11 @@ function setLabels(m,d,y){
 
 //hides the calendar based on table id
 function hideCal(idIn) {
-    console.log("hide calendar: "+idIn);
     document.getElementById(idIn).style.display = "none";
 }
 
 //shows the calendar based on table id
 function showCal(idIn) {
-    console.log("Show Calendar: "+idIn);
     document.getElementById(idIn).style.display = "block";
 }
 
@@ -229,18 +232,12 @@ function highlightShift(idIn) {
     var ts = document.getElementById('ts'+(index+1));
     var te = document.getElementById('te'+(index+1));
 
-    console.log(t.value);
-    console.log(ts.value);
-
-
-
     if (te.value && t.value && ts.value) {
         console.log(index);
         currColor = index;
 
         //set tmpbtn to the id and set opacity to 1
         var tmpbtn = document.getElementById(idIn);
-        console.log("idin: " + idIn);
         tmpbtn.style.opacity = 1;
 
 
