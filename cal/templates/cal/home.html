@@ -1,7 +1,9 @@
 {% extends "cal/base.html" %}
 {% load static %}
 {% block content %}
+
     <body>
+
         <!-- dynamically populated calendar -->
         <div class="container-month-year w3-animate-top" id="container-month-year" >
             <h1 id="month-year" style="margin:0; padding-top:2%;"></h1>
@@ -19,17 +21,21 @@
 
         <!-- shift selection -->
         <div id="left" style="padding-top:15%"></div>
+
+        <!-- edit this later -->
         <h1>Shift Types</h1>
-            <p> Shift Type 1 Title: 
-                <input type="text" id = "t1"> Time:
-                <input id="ts1" type="time"> to
-                <input id="te1" type="time">
-                <button type="button" class="btnShift" id="shift1" onclick="highlightShift('shift1')">Select Shift 1</button>
-            <br>Shift Type 2 Title: <input type="text"id = "t2"> Time:
-                <input id="ts2" type="time"> to
-                <input id="te2" type="time">          
-                <button type="button" class="btnShift" id="shift2" onclick="highlightShift('shift2')">Select Shift 2</button>
+        {% for time in c_save %}   
+            <p>
+                <button type="button" class="btnShift" id="shift1" onclick="highlightShift('shift1')">
+                    {{ time.title}}
+                </button>
+                Start Time: {{time.start_time}}   End Time: {{time.end_time}}
+                <form action="{% url 'time-detail' time.id %}">
+                    <button type="button" class="btnshift" id="shift2"> Edit </button>
+                </form>
             </p>
+        {% endfor %}
+
     <script type="text/javascript" src="{% static 'cal/script.js' %}"></script>
     </body>
 {% endblock content %}
