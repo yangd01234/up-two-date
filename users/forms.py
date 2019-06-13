@@ -10,3 +10,11 @@ class UserRegisterForm(UserCreationForm):
         model = User
         # fields that the form populates and in what order
         fields = ['username', 'email', 'password1', 'password2']
+
+# model form to update user
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']
