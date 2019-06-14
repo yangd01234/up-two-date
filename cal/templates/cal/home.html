@@ -18,7 +18,8 @@
         <p id="stat4">text</p>
         <h1 id="stat2">text2</h1>
     
-
+        <!-- Add a new time -->
+        <a class="nav-item nav-link" href="{% url 'time-create' %}">New Time</a>
         <!-- shift selection -->
         <div id="left" style="padding-top:15%"></div>
 
@@ -29,10 +30,9 @@
                 <button type="button" class="btnShift" id="shift1" onclick="highlightShift('shift1')">
                     {{ time.title}}
                 </button>
-                Start Time: {{time.start_time}}   End Time: {{time.end_time}}
-                <form action="{% url 'time-detail' time.id %}">
-                    <button type="button" class="btnshift" id="shift2"> Edit </button>
-                </form>
+                <a class="article-title" href="{% url 'time-detail' time.id %}">
+                    Start Time: {{time.start_time}}   End Time: {{time.end_time}}
+                </a>
             </p>
         {% endfor %}
 

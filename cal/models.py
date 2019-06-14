@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 import datetime
 
 class Time(models.Model):
@@ -12,3 +13,6 @@ class Time(models.Model):
 
     def __str__(self):
         return self.title
+    # get url as a string and let view handle redirect
+    def get_absolute_url(self):
+        return reverse('time-detail', kwargs={'pk':self.pk})
