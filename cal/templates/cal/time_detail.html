@@ -1,13 +1,22 @@
 {% extends "cal/base.html" %}
 {% load static %}
 {% block content %}
+{% if object.owner == user %}
     <article class="media content-section">
         <div class="media-body">
             <!-- edit this class later ! -->
             <div class="article-metadata">
                 <h2 class="article-title">{{ object.username}}</h2>
                 <p class="article-content">{{ object.title}}</p>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'time-update' object.id %}">Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'time-delete' object.id %}">Delete</a>
+                <a class="btn btn-info btn-sm mt-1 mb-1" href="{% url 'calendar-home' %}">Go Back</a>
             </div>
         </div>
     </article>
+{% else %}
+<article class="media content-section">
+    <h1>Please try again...</h1>
+</article>
+{% endif %}
 {% endblock content %}
