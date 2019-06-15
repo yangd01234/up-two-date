@@ -23,7 +23,7 @@ class TimeDetailView(DetailView):
 
 class TimeCreateView(LoginRequiredMixin, CreateView):
     model = Time
-    fields = ['title','color','start_time','end_time']
+    fields = ['title','color','start_time','end_time', 'days']
 
     # set form author to current logged in user
     def form_valid(self, form):
@@ -32,7 +32,7 @@ class TimeCreateView(LoginRequiredMixin, CreateView):
 
 class TimeUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Time
-    fields = ['title','color','start_time','end_time']
+    fields = ['title','color','start_time','end_time', 'days']
 
     # set form author to current logged in user
     def form_valid(self, form):
