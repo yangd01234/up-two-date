@@ -1,7 +1,17 @@
 {% extends "cal/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
+    <!-- legend for parameters -->
+    <div class="alert alert-info">
+        <strong>Legend:</strong>
+        <ul>
+            <li>Start and end times are in military time. Ex: 23:00 is 11PM</li>
+            <li>Days indicates number of days from start to end time.</li>
+        </ul>
+    </div>
+
+    <!-- Add time form -->
+    <div class="content-section ">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
@@ -17,4 +27,5 @@
             </div>
         </form>
     </div>
+
 {% endblock content %}

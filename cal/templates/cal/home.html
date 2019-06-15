@@ -31,7 +31,7 @@
                     {{ time.title}}
                 </button>
                 <a class="article-title" href="{% url 'time-detail' time.id %}">
-                    Start Time: {{time.start_time}}   End Time: {{time.end_time}}
+                    Start Time: {{ time.start_time|date:"G:i" }}   End Time: {{time.end_time|date:"G:i"}} Days: {{time.days}}
                 </a>
             </p>
         {% endfor %}
