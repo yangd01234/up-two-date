@@ -6,28 +6,19 @@
 
         <!-- dynamically populated calendar -->
         <div class="container-month-year w3-animate-top" id="container-month-year" >
-            <h1 id="month-year" style="margin:0; padding-top:2%;"></h1>
-            <button type="button" class="btnNav" id="prevMonth" onclick="prev()">Previous Month</button>
-            <button type="button" class="btnNav" id="nextMonth" onclick="nxt()">Next Month</button>
+            <h1 id="month-year" style="margin:0; padding-bottom:2%;"></h1>
         </div>
-
+        <button type="button" class="btn btn-primary" id="prevMonth" onclick="prev()">Previous Month</button>
+        <button type="button" class="btn btn-primary" id="nextMonth" onclick="nxt()">Next Month</button>
         <div id = "calContainer" style="float: left;"></div>
-        <p id="stat">text</p>
-        <p id="stat1">text</p>
-        <p id="stat3">text</p>
-        <p id="stat4">text</p>
-        <h1 id="stat2">text2</h1>
     
         <!-- Add a new time -->
         <a class="nav-item nav-link" href="{% url 'time-create' %}">New Time</a>
         <!-- shift selection -->
-        <div id="left" style="padding-top:15%"></div>
-
-        <!-- edit this later -->
         <h1>Shift Types</h1>
         {% for time in c_save %}   
             <p>
-                <button type="button" class="btnShift" id="shift1" onclick="highlightShift('shift1')">
+                <button type="button" class="btnShift" id="shift{{ forloop.counter }}" onclick="highlightShift('shift{{forloop.counter}}')">
                     {{ time.title}}
                 </button>
                 <a class="article-title" href="{% url 'time-detail' time.id %}">
