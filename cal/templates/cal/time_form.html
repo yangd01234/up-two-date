@@ -1,12 +1,13 @@
 {% extends "cal/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <!-- legend for parameters -->
+    <!-- notes for parameters -->
     <div class="alert alert-info">
-        <strong>Legend:</strong>
+        <strong>Note:</strong>
         <ul>
             <li>Start and end times are in military time. Ex: 23:00 is 11PM</li>
             <li>Days indicates number of days from start to end time.</li>
+            <li>If you want 12AM the next day, make sure to indicate 1 day</li>
         </ul>
     </div>
 

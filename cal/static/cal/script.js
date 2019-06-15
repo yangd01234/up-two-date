@@ -35,6 +35,8 @@ function createPage(containerIn,m,y){
     var arr = ["January","February","March","April","May","June","July",
         "August","September","October","November","December"];
     var listDays = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var numCol = 0;
+    var currRow = 1;
 
     //create a table
     var container = document.getElementById(containerIn);
@@ -48,11 +50,7 @@ function createPage(containerIn,m,y){
         fDay = 0;
     }
     var lDay = new Date(y,m,0).getDate();
-    document.getElementById("stat2").innerHTML = 'Total number of days: '+lDay;
     setLabels(arr[m-1],daysInMonth(m,y),y);
-
-    var numCol = 0;
-    var currRow = 1;
 
     newTable.id = "table"+m+"-"+y;
     //create the headers
@@ -80,23 +78,22 @@ function createPage(containerIn,m,y){
 
         var row = newTable.rows[currRow].insertCell(-1);
         var day = document.createElement('td');
+        day.className = "calendar-td";
 
         //creates the blank days
         if ((fDay > i)) {
-            day.textContent = 'Blank Days';
             row.appendChild(day);
         } else if (lDay+fDay-1 < i){
-            day.textContent = 'Blank Days';
             row.appendChild(day);
         } else {//otherwise populates the days with a non blank
-
             var btn = document.createElement('button');
             btn.type = "button";
-            btn.className = "btn";
+            btn.className = "calendar-btn";
+            // set background color to toggle highlight change
+            btn.style.backgroundColor = "black";
             btn.id = "btn"+tmpId;//MAKE SURE to format for end of year
-            btn.style.backgroundColor = "black";//remove this if needed
             btn.setAttribute('onClick', "colorChange(" + "'" + "btn"+tmpId + "')");
-            btn.innerHTML = 'Day:' + (i + 1 - fDay);
+            btn.innerHTML = (i + 1 - fDay);
             day.appendChild(btn);
             row.appendChild(day);
         }
@@ -109,7 +106,6 @@ function createPage(containerIn,m,y){
 //sets the labels for mm, dd, yyyy
 function setLabels(m,d,y){
     document.getElementById("month-year").innerHTML = m+" "+y;
-    document.getElementById("stat2").innerHTML = "Total days: "+d; //DELETE
 }
 
 
@@ -187,14 +183,14 @@ function nxt() {
 }
 
 //changes the color of item clicked
-//also needs to add to arrays
 function colorChange(id){
     if(currColor != undefined) {
         //sets the background color var
         var index = list.indexOf(id.substring(3));
         var background = document.getElementById(id).style;
 
-        if (background.backgroundColor == "black") {//if the item is blank, create and push new array items
+        //if the item is blank, create and push new array items
+        if (background.backgroundColor == "black") {
             //2018-03-22 date format
             list.push(id.substring(3));
             subject.push(titleInput);
@@ -214,12 +210,6 @@ function colorChange(id){
             background.backgroundColor = "black";
 
         }
-        //document.getElementById("stat").innerHTML = list;
-        //document.getElementById("stat1").innerHTML = subject;
-        //document.getElementById("stat3").innerHTML = startTime;
-        //document.getElementById("stat4").innerHTML = endTime;
-
-        //document.getElementById("stat").innerHTML = "boo"*/
     }
 }
 
@@ -227,32 +217,22 @@ function highlightShift(idIn) {
 
     //get the index for the btn id
     var index = btnId.indexOf(idIn);
-    //ts,te,t
-    var t = document.getElementById('t'+(index+1));
-    var ts = document.getElementById('ts'+(index+1));
-    var te = document.getElementById('te'+(index+1));
 
-    if (te.value && t.value && ts.value) {
-        console.log(index);
-        currColor = index;
+    //get the number of highlight buttons
+    var numHighlightBtn = document.getElementsByClassName('btnShift').length;
 
-        //set tmpbtn to the id and set opacity to 1
-        var tmpbtn = document.getElementById(idIn);
-        tmpbtn.style.opacity = 1;
+    // set current color
+    currColor = index;
 
+    //set tmpbtn to the id and set opacity to 1
+    var tmpbtn = document.getElementById(idIn);
+    tmpbtn.style.opacity = 1;
 
-        //set the current placeholders to the values so you can populate in list later
-        timeEnd = document.getElementById("te" + (index + 1)).value;
-        timeStart = document.getElementById("ts" + (index + 1)).value;
-        titleInput = document.getElementById("t" + (index + 1)).value;
-
-
-        //set all other tmpbtn opacity to 0
-        for (var i = 0; i < btnId.length; i++) {
-            if (i != index) {
-                var tmp2btn = document.getElementById(btnId[i]);
-                tmp2btn.style.opacity = 0.4;
-            }
+    //set all other tmpbtn opacity to 0
+    for (var i = 0; i < numHighlightBtn; i++) {
+        if (i != index) {
+            var tmp2btn = document.getElementById(btnId[i]);
+            tmp2btn.style.opacity = 0.4;
         }
     }
 }

@@ -8,10 +8,8 @@ body {
     color: #444444;
   }
 
-  .container1 h1 {
-    margin: 0
-  }
   .container-month-year h1 {
+    font-size: 450%;
     margin: 0
   }
   
@@ -102,20 +100,6 @@ h4{
 }
 
 
-.btn {
-    background-color: black;
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-align: center;
-    font-size: 16px;
-    margin: 4px 2px;
-    opacity: 0.4;
-    transition: 0.3s;
-    display: inline-block;
-    text-decoration: none;
-    cursor: pointer;
-}
 #shift1{
     background-color: royalblue;
     border: none;
@@ -152,11 +136,39 @@ h4{
     opacity: 1
 }
 
-.btn:hover {
-    opacity: 1
+
+.calendar-td {
+  width: 200px;
+  height: 70px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ECECEC;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
 }
 
 
+.calendar-btn:hover {
+  opacity: 1
+}
+
+.calendar-btn {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.4;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 .container1{
     height: 100px;
