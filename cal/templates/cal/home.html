@@ -6,10 +6,12 @@
 
         <!-- dynamically populated calendar -->
         <div class="container-month-year w3-animate-top" id="container-month-year" >
-            <h1 id="month-year" style="margin:0; padding-bottom:2%;"></h1>
+            <h1 id="month-year" style="margin:0; padding-bottom:1%;"></h1>
         </div>
-        <button type="button" class="btn btn-primary" id="prevMonth" onclick="prev()">Previous Month</button>
-        <button type="button" class="btn btn-primary" id="nextMonth" onclick="nxt()">Next Month</button>
+        <div style="padding-bottom:.2%;">
+            <button type="button" class="btn btn-primary" id="prevMonth" onclick="prev()">Previous Month</button>
+            <button type="button" class="btn btn-primary" id="nextMonth" onclick="nxt()">Next Month</button>
+        </div>
         <div id = "calContainer" style="float: left;"></div>
     
         <!-- Add a new time -->
