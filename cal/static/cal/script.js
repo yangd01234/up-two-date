@@ -182,7 +182,7 @@ function nxt() {
 
 }
 
-//changes the color of item clicked
+//changes the color of item clicked and appends/removes item to list
 function colorChange(id){
     if(currColor != undefined) {
         //sets the background color var
@@ -215,14 +215,20 @@ function colorChange(id){
 
 function highlightShift(idIn) {
 
-    //get the index for the btn id
+    // index for the btn id
     var index = btnId.indexOf(idIn);
 
-    //get the number of highlight buttons
+    // used for index within html page
+    var adjustedIndex = index+1;
+
+    // number of highlight buttons
     var numHighlightBtn = document.getElementsByClassName('btnShift').length;
 
-    // set current color
+    // set current variables
     currColor = index;
+    timeStart = document.getElementById('start-time'+adjustedIndex).innerHTML;
+    timeEnd = document.getElementById('end-time'+adjustedIndex).innerHTML;
+    titleInput = document.getElementById('shift'+adjustedIndex).innerHTML;
 
     //set tmpbtn to the id and set opacity to 1
     var tmpbtn = document.getElementById(idIn);
