@@ -6,10 +6,12 @@
 
         <!-- dynamically populated calendar -->
         <div class="container-month-year w3-animate-top" id="container-month-year" >
-            <h1 id="month-year" style="margin:0; padding-bottom:2%;"></h1>
+            <h1 id="month-year" style="margin:0; padding-bottom:1%;"></h1>
         </div>
-        <button type="button" class="btn btn-primary" id="prevMonth" onclick="prev()">Previous Month</button>
-        <button type="button" class="btn btn-primary" id="nextMonth" onclick="nxt()">Next Month</button>
+        <div style="padding-bottom:.2%;">
+            <button type="button" class="btn btn-primary" id="prevMonth" onclick="prev()">Previous Month</button>
+            <button type="button" class="btn btn-primary" id="nextMonth" onclick="nxt()">Next Month</button>
+        </div>
         <div id = "calContainer" style="float: left;"></div>
     
         <!-- Add a new time -->
@@ -18,15 +20,28 @@
         <h1>Shift Types</h1>
         {% for time in c_save %}   
             <p>
-                <button type="button" class="btnShift" id="shift{{ forloop.counter }}" onclick="highlightShift('shift{{forloop.counter}}')">
-                    {{ time.title}}
-                </button>
+                <button type="button" class="btnShift" id="shift{{ forloop.counter }}" onclick="highlightShift('shift{{forloop.counter}}')">{{ time.title}}</button>
                 <a class="article-title" href="{% url 'time-detail' time.id %}">
-                    Start Time: {{ time.start_time|date:"G:i" }}   End Time: {{time.end_time|date:"G:i"}} Days: {{time.days}}
+                    Start Time: 
+                    <span id="start-time{{ forloop.counter }}">{{ time.start_time|date:"G:i" }}</span>
+                    End Time: 
+                    <span id="end-time{{ forloop.counter }}">{{time.end_time|date:"G:i"}}</span>
                 </a>
             </p>
         {% endfor %}
 
+        <!-- Google Calendar API Button -->
+        <h1>Submit to Google Calendar</h1>
+        <button id="authorize-button" style="display: none;">Sign in to Google and Post</button>
+        <button id="signout-button" style="display: none;">Sign Out of Google Calendar</button>
+
     <script type="text/javascript" src="{% static 'cal/script.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'cal/cal_api.js' %}"></script>
+
+    <script async defer src="https://apis.google.com/js/api.js"
+        onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
     </body>
 {% endblock content %}
