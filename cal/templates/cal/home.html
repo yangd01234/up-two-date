@@ -12,10 +12,16 @@
             <button type="button" class="btn btn-primary" id="prevMonth" onclick="prev()">Previous Month</button>
             <button type="button" class="btn btn-primary" id="nextMonth" onclick="nxt()">Next Month</button>
         </div>
-        <div id = "calContainer" style="float: left;"></div>
+        <div id = "calContainer" style="float: left; margin-bottom: 2%;"></div>
     
-        <!-- Add a new time -->
-        <a class="nav-item nav-link" href="{% url 'time-create' %}">New Time</a>
+        <!-- Add a new time and validate via frontend-->
+        {% if c_save|length > 4%}
+            <button type="button" class="btn btn-danger" disabled>New Time</button>
+            <p>Cannot add a new time, only a maximum of 5 times can be added.  Please delete to add more.</p>
+        {% else %}
+            <a class="btn btn-primary" href="{% url 'time-create' %}">New Time</a>
+        {% endif %}
+
         <!-- shift selection -->
         <h1>Shift Types</h1>
         {% for time in c_save %}   
@@ -32,8 +38,7 @@
 
         <!-- Google Calendar API Button -->
         <h1>Submit to Google Calendar</h1>
-        <button id="authorize-button" style="display: none;">Sign in to Google and Post</button>
-        <button id="signout-button" style="display: none;">Sign Out of Google Calendar</button>
+        <button id="authorize-button" class="btn btn-success" style="display: none;" disabled>Sign in to Google and Post</button>
 
     <script type="text/javascript" src="{% static 'cal/script.js' %}"></script>
 
