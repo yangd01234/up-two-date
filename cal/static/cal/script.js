@@ -182,6 +182,15 @@ function nxt() {
 
 }
 
+// makes add to google calendar visible
+function submitCalVisibility(){
+    if(subject.length != 0){
+        document.getElementById('authorize-button').disabled = false;
+    } else {
+        document.getElementById('authorize-button').disabled = true;
+    }
+}
+
 //changes the color of item clicked and appends/removes item to list
 function colorChange(id){
     if(currColor != undefined) {
@@ -211,6 +220,8 @@ function colorChange(id){
 
         }
     }
+    // make google calendar submit button available/disabled
+    submitCalVisibility();
 }
 
 function highlightShift(idIn) {

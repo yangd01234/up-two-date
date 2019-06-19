@@ -38,7 +38,7 @@ function initClient() {
     // Handle the initial sign-in state.
     updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
     authorizeButton.onclick = handleAuthClick;
-    signoutButton.onclick = handleSignoutClick;
+    //signoutButton.onclick = handleSignoutClick;
   });
 
 }
@@ -53,7 +53,7 @@ function updateSigninStatus(isSignedIn) {
     var batchList = gapi.client.newBatch();
 
     authorizeButton.style.display = 'none';
-    signoutButton.style.display = 'block';
+    //signoutButton.style.display = 'block';
 
      for(var i = 0; i<list.length;i++){
 
@@ -70,15 +70,12 @@ function updateSigninStatus(isSignedIn) {
     Promise.all([batchList])
     .then(x=>console.log(x));
 
-    // resets all events
-    list = [];
-    startTime = [];
-    endTime = [];
-    subject = [];
-    
+    // logout user
+    gapi.auth2.getAuthInstance().signOut();
+
   } else {
     authorizeButton.style.display = 'block';
-    signoutButton.style.display = 'none';
+    //signoutButton.style.display = 'none';
   }
 }
 
