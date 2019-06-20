@@ -101,39 +101,37 @@ h4{
 
 
 #shift1{
-    background-color: royalblue;
-    border: none;
-    color: white;
-    padding: 3px 32px;
-    text-align: center;
-    font-size: 16px;
-    margin: 4px 2px;
-    opacity: 0.4;
-    transition: 0.3s;
-    display: inline-block;
-    text-decoration: none;
-    cursor: pointer;
-}
-#shift2{
-    background-color: orange;
-    border: none;
-    color: white;
-    padding: 3px 32px;
-    text-align: center;
-    font-size: 16px;
-    margin: 4px 2px;
-    opacity: 0.4;
-    transition: 0.3s;
-    display: inline-block;
-    text-decoration: none;
-    cursor: pointer;
+    background-color: #0099CC;
 }
 
-#shift1:hover {
-    opacity: 1
+#shift2{
+    background-color: #007E33;
 }
-#shift2:hover {
-    opacity: 1
+
+#shift3{
+  background-color: #FF8800;
+}
+
+#shift4{
+  background-color: #CC0000;
+}
+
+#shift5{
+  background-color: #9933CC;
+}
+.btn-time {
+    border: none;
+    color: white;
+    width: 40%;
+    padding: 3px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    opacity: 0.4;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 

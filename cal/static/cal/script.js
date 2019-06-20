@@ -6,9 +6,6 @@ var startTime = new Array;
 var endTime = new Array;
 var currColor;
 
-var colors = new Array;
-colors = ["royalblue","orange","red","#00BF9D","#921DE0"];
-
 var btnId = new Array;
 btnId = ["shift1","shift2","shift3","shift4","shift5"];
 
@@ -193,9 +190,14 @@ function submitCalVisibility(){
 
 //changes the color of item clicked and appends/removes item to list
 function colorChange(id){
+
+    var colors = new Array;
+    colors = ["#0099CC","#007E33","#FF8800","#CC0000","#9933CC"];
+
     if(currColor != undefined) {
         //sets the background color var
         var index = list.indexOf(id.substring(3));
+
         var background = document.getElementById(id).style;
 
         //if the item is blank, create and push new array items
@@ -233,7 +235,7 @@ function highlightShift(idIn) {
     var adjustedIndex = index+1;
 
     // number of highlight buttons
-    var numHighlightBtn = document.getElementsByClassName('btnShift').length;
+    var numHighlightBtn = document.getElementsByClassName('btn-time').length;
 
     // set current variables
     currColor = index;
