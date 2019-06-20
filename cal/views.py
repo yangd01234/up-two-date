@@ -6,7 +6,7 @@ from .models import Time
 from django.contrib import messages
 
 # homepage
-@login_required
+@login_required(login_url='/login/')
 def home(request):
     context = {
         'c_save': Time.objects.all()
@@ -14,9 +14,16 @@ def home(request):
     return render(request, 'cal/home.html', context)
 
 # class list based view to display saved times, inherits from ListView
-class TimeListView(ListView):
+class TimeListView(LoginRequiredMixin, ListView):
     model = Time
     template_name = 'cal/home.html' # convention: <app>/<model>_<viewtype>.html
+
+    # filter for only current user's time
+    def get_queryset(self):
+        queryset = super(TimeListView, self).get_queryset()
+        queryset = queryset.filter(owner=self.request.user)
+        return queryset
+
     context_object_name = 'c_save'
 
 # gives details on saved time
@@ -37,7 +44,7 @@ class TimeCreateView(LoginRequiredMixin, CreateView):
         # set form author to current logged in user and 
         form.instance.owner = self.request.user
 
-        # validates if start time is smalelr than end time
+        # validates if start time is smaller than end time
         start_time = form.cleaned_data['start_time']
         end_time = form.cleaned_data['end_time']
         if end_time <= start_time:
