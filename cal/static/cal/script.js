@@ -1,6 +1,4 @@
-
-//NEW SCRIPT
-var list=new Array;
+var dateList=new Array;
 var subject = new Array;
 var startTime = new Array;
 var endTime = new Array;
@@ -18,16 +16,14 @@ var titleInput = "";
 
 var currMonth = new Date().getMonth()+1;
 var currYear = new Date().getFullYear();
-
 createPage("calContainer",currMonth,currYear);
-//note that 3 = march, 1= jan
 
 // helper function for # of days in month
 function daysInMonth(m, y){
     return new Date(y, m, 0).getDate();
 }
 
-//creates a new calendar in container.  "calContainer"
+//creates a new dynamic calendar in container.  "calContainer"
 function createPage(containerIn,m,y){
     var arr = ["January","February","March","April","May","June","July",
         "August","September","October","November","December"];
@@ -48,8 +44,8 @@ function createPage(containerIn,m,y){
     }
     var lDay = new Date(y,m,0).getDate();
     setLabels(arr[m-1],daysInMonth(m,y),y);
-
     newTable.id = "table"+m+"-"+y;
+
     //create the headers
     for (i = 0; i < listDays.length; i++) {
         var th = document.createElement('th');
@@ -117,16 +113,7 @@ function showCal(idIn) {
 }
 
 
-/*=====Previous button=====
-- decrement year
-- decrement month (if month is january, set month to dec)
--hide current calendar
--if(previous calendar exists)
-        show previous calendar
-        else
-        create calendar
--change display
- */
+// decrement month and hide future calendar
 function prev() {
     var arr = ["January","February","March","April","May","June","July",
         "August","September","October","November","December"];
@@ -152,7 +139,7 @@ function prev() {
 
 }
 
-//Next button clicked
+// increment month and hide past calendar
 function nxt() {
     var arr = ["January","February","March","April","May","June","July",
         "August","September","October","November","December"];
@@ -179,7 +166,7 @@ function nxt() {
 
 }
 
-// makes add to google calendar visible
+// changes google calendar button visibility
 function submitCalVisibility(){
     if(subject.length != 0){
         document.getElementById('authorize-button').disabled = false;
@@ -196,14 +183,14 @@ function colorChange(id){
 
     if(currColor != undefined) {
         //sets the background color var
-        var index = list.indexOf(id.substring(3));
+        var index = dateList.indexOf(id.substring(3));
 
         var background = document.getElementById(id).style;
 
         //if the item is blank, create and push new array items
         if (background.backgroundColor == "black") {
             //2018-03-22 date format
-            list.push(id.substring(3));
+            dateList.push(id.substring(3));
             subject.push(titleInput);
             startTime.push(timeStart);
             endTime.push(timeEnd);
@@ -213,7 +200,7 @@ function colorChange(id){
 
             if (index !== -1) {
                 //remove from list
-                list.splice(index, 1);
+                dateList.splice(index, 1);
                 subject.splice(index, 1);
                 startTime.splice(index, 1);
                 endTime.splice(index, 1);
@@ -226,6 +213,7 @@ function colorChange(id){
     submitCalVisibility();
 }
 
+// highlights current shift/time and un-highlights others
 function highlightShift(idIn) {
 
     // index for the btn id
@@ -256,4 +244,32 @@ function highlightShift(idIn) {
     }
 }
 
+//  displays the submission confirmation modal
+function confirmModal(){
+    var modal = document.getElementById("calModal");
+    var modalTitle = document.getElementById("modal-title");
+    var modalMessage = document.getElementById("modal-message");
+    var text = "";
+    modalTitle.innerHTML = "Submitted Success!";
+
+    // loop over list and post 
+    var listLen = dateList.length;
+    for (var i = 0; i < listLen; i++){
+        text += ("<br>" + "Title: " + subject[i]
+                + " Start Time: " + startTime[i]
+                + " End Time: " + endTime[i]
+                + " Date: "+ dateList[i]
+                + "&#13;&#10;");
+    }
+    modalMessage.innerHTML = text;
+
+    modal.style.display = "block";
+}
+
+// closes the submission confirmation modal
+function closeModal(){
+    var modal = document.getElementById("calModal");
+    modal.style.display = "none";
+    document.location.reload(true);
+}
 

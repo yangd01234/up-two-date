@@ -17,35 +17,45 @@
         </div>
 
         <div class="col-sm" style="margin-top: 8%;">
-            <!-- shift selection -->
-            <h1>Shift Types</h1>
-            {% if c_save|length > 4%}
-                <button type="button" class="btn btn-danger" disabled>New Time</button>
-                <p>Cannot add a new time, only a maximum of 5 times can be added.  Please delete to add more.</p>
-            {% else %}
-                <a class="btn btn-primary" href="{% url 'time-create' %}">New Time</a>
-            {% endif %}
-            <p style="margin-top: 3%;">
-            {% for time in c_save %}   
-                    <button type="button" class="btn-time shift" id="shift{{ forloop.counter }}" onclick="highlightShift('shift{{forloop.counter}}')">{{ time.title}}</button>
-                    <a class="article-title" href="{% url 'time-detail' time.id %}">
-                    Start Time: 
-                    <span id="start-time{{ forloop.counter }}">{{ time.start_time|date:"G:i" }}</span>
-                    End Time: 
-                    <span id="end-time{{ forloop.counter }}">{{time.end_time|date:"G:i"}}</span>
-                    </a>
-            {% endfor %}
-            </p>
+
+        <!-- shift selection -->
+        <h1>Shift Types</h1>
+        {% if c_save|length > 4%}
+            <button type="button" class="btn btn-danger" disabled>New Time</button>
+            <p>Cannot add a new time, only a maximum of 5 times can be added.  Please delete to add more.</p>
+        {% else %}
+            <a class="btn btn-primary" href="{% url 'time-create' %}">New Time</a>
+        {% endif %}
+        <p style="margin-top: 3%;">
+        {% for time in c_save %}   
+            <div>
+                <button type="button" class="btn-time shift" id="shift{{ forloop.counter }}" onclick="highlightShift('shift{{forloop.counter}}')">{{ time.title}}</button>
+                <a class="article-title" href="{% url 'time-detail' time.id %}">
+                Start Time: 
+                <span id="start-time{{ forloop.counter }}">{{ time.start_time|date:"G:i" }}</span>
+                End Time: 
+                <span id="end-time{{ forloop.counter }}">{{time.end_time|date:"G:i"}}</span>
+                </a>
+            </div>
+        {% endfor %}
+        </p>
 
     <!-- Google Calendar API Button -->
     <h1>Submit to Google Calendar</h1>
     <button id="authorize-button" class="btn btn-success" style="display: none;" disabled>Sign in to Google and Post</button>
+    </div>
+
+    <!-- Calendar confirmation modal -->
+    <div id="calModal" style="display: none;" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h1 id="modal-title"></h1>
+            <p id="modal-message"></p>
         </div>
-
+    </div>
+    
     <script type="text/javascript" src="{% static 'cal/script.js' %}"></script>
-
     <script type="text/javascript" src="{% static 'cal/cal_api.js' %}"></script>
-
     <script async defer src="https://apis.google.com/js/api.js"
         onload="this.onload=function(){};handleClientLoad()"
         onreadystatechange="if (this.readyState === 'complete') this.onload()">
