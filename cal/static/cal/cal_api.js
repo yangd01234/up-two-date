@@ -17,7 +17,6 @@ var signoutButton = document.getElementById('signout-button');
  *  On load, called to load the auth2 library and API client library.
  */
 function handleClientLoad() {
-    console.log("this is a test start");
   gapi.load('client:auth2', initClient);
 }
 
@@ -55,10 +54,10 @@ function updateSigninStatus(isSignedIn) {
     authorizeButton.style.display = 'none';
     //signoutButton.style.display = 'block';
 
-     for(var i = 0; i<list.length;i++){
+     for(var i = 0; i<dateList.length;i++){
 
         // formats events for google calendar api
-        var postCode = eventFormat(list[i],startTime[i],endTime[i],subject[i]);
+        var postCode = eventFormat(dateList[i],startTime[i],endTime[i],subject[i]);
 
         batchList.add(gapi.client.calendar.events.insert({
             'calendarId': 'primary',
@@ -69,6 +68,9 @@ function updateSigninStatus(isSignedIn) {
     // confirms promise for batch request
     Promise.all([batchList])
     .then(x=>console.log(x));
+
+    //post message
+    confirmModal();
 
     // logout user
     gapi.auth2.getAuthInstance().signOut();
