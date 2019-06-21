@@ -1,4 +1,3 @@
-var counter = 0;
 // Client ID and API key from the Developer Console
 var CLIENT_ID = '324912967835-sgfrraopae6ivgokphojfbov78rkibi9.apps.googleusercontent.com';
 var API_KEY = 'AIzaSyBJ35-UUQCNcXevnE0cYAttHICDT07dfWM';
@@ -9,9 +8,6 @@ var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/
 // Authorization scopes required by the API; multiple scopes can be
 // included, separated by spaces.
 var SCOPES = "https://www.googleapis.com/auth/calendar";
-
-var authorizeButton = document.getElementById('authorize-button');
-var signoutButton = document.getElementById('signout-button');
 
 /**
  *  On load, called to load the auth2 library and API client library.
@@ -36,7 +32,7 @@ function initClient() {
 
     // Handle the initial sign-in state.
     updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-    authorizeButton.onclick = handleAuthClick;
+    CalLib.authorizeButton.onclick = handleAuthClick;
     //signoutButton.onclick = handleSignoutClick;
   });
 
@@ -51,13 +47,13 @@ function updateSigninStatus(isSignedIn) {
 
     var batchList = gapi.client.newBatch();
 
-    authorizeButton.style.display = 'none';
+    CalLib.authorizeButton.style.display = 'none';
     //signoutButton.style.display = 'block';
 
-     for(var i = 0; i<dateList.length;i++){
+     for(var i = 0; i<CalLib.dateList.length;i++){
 
         // formats events for google calendar api
-        var postCode = eventFormat(dateList[i],startTime[i],endTime[i],subject[i]);
+        var postCode = eventFormat(CalLib.dateList[i], CalLib.startTime[i],CalLib.endTime[i],CalLib.subject[i]);
 
         batchList.add(gapi.client.calendar.events.insert({
             'calendarId': 'primary',
@@ -69,14 +65,14 @@ function updateSigninStatus(isSignedIn) {
     Promise.all([batchList])
     .then(x=>console.log(x));
 
-    //post message
+    // post message to modal
     confirmModal();
 
     // logout user
     gapi.auth2.getAuthInstance().signOut();
 
   } else {
-    authorizeButton.style.display = 'block';
+    CalLib.authorizeButton.style.display = 'block';
   }
 }
 
@@ -139,7 +135,13 @@ function listUpcomingEvents() {
 }
 
 
-// formats events
+/**
+ *  Formats events for Google calendar API
+ * @param {string} dateIn date to be placed in dateTime
+ * @param {string} start start time to be placed in dateTime
+ * @param {string} end end time to be placed in dateTime
+ * @param {string} title title to be placed in summary
+ */
 function eventFormat(dateIn,start,end,title){
     var returnCode = 0;
 
@@ -149,13 +151,10 @@ function eventFormat(dateIn,start,end,title){
         'description': 'Test description',
         'start': {
             'dateTime': dateIn+'T'+start+':00-07:00',
-            //'dateTime': '2018-04-1T14:00:00-07:00',
-            //'dateTime': dateIn+'T14:00:00-07:00',
             'timeZone': 'America/Los_Angeles'
         },
         'end': {
             'dateTime': dateIn+'T'+end+':00-07:00',
-            //'dateTime':  dateIn+'T17:00:00-07:00',
             'timeZone': 'America/Los_Angeles'
         },
 

@@ -30,7 +30,7 @@
         {% for time in c_save %}   
             <div>
                 <button type="button" class="btn-time shift" id="shift{{ forloop.counter }}" onclick="highlightShift('shift{{forloop.counter}}')">{{ time.title}}</button>
-                <a class="article-title" href="{% url 'time-detail' time.id %}">
+                <a class="time-title" href="{% url 'time-detail' time.id %}">
                 Start Time: 
                 <span id="start-time{{ forloop.counter }}">{{ time.start_time|date:"G:i" }}</span>
                 End Time: 

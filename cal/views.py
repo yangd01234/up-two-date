@@ -39,7 +39,6 @@ class TimeCreateView(LoginRequiredMixin, CreateView):
 
         # validate if times <= 5
         if len(Time.objects.filter(owner=self.request.user)) >= 5:
-            print("supposed to redirect")
             return redirect("/")
         # set form author to current logged in user and 
         form.instance.owner = self.request.user

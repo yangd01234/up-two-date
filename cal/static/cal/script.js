@@ -1,29 +1,37 @@
-var dateList=new Array;
-var subject = new Array;
-var startTime = new Array;
-var endTime = new Array;
-var currColor;
+window.CalLib = {};
 
-var btnId = new Array;
-btnId = ["shift1","shift2","shift3","shift4","shift5"];
+CalLib.dateList=new Array;
+CalLib.subject = new Array;
+CalLib.startTime = new Array;
+CalLib.endTime = new Array;
+CalLib.currColor;
+CalLib.timeStart = "";
+CalLib.timeEnd = "";
+CalLib.titleInput = "";
+
+CalLib.currMonth = new Date().getMonth()+1;
+CalLib.currYear = new Date().getFullYear();
+CalLib.authorizeButton = document.getElementById('authorize-button');
+
+createPage("calContainer",CalLib.currMonth,CalLib.currYear);
 
 
-
-var timeStart = "";
-var timeEnd = "";
-var titleInput = "";
-
-
-var currMonth = new Date().getMonth()+1;
-var currYear = new Date().getFullYear();
-createPage("calContainer",currMonth,currYear);
-
-// helper function for # of days in month
+/**
+ *  Helper function for # of days in a month.
+ * @param {integer} m month.
+ * @param {integer} y year.
+ * @return {Date} new date object
+ */
 function daysInMonth(m, y){
     return new Date(y, m, 0).getDate();
 }
 
-//creates a new dynamic calendar in container.  "calContainer"
+/**
+ *  Creates a new dynamic calendar in container: "calContainer"
+ * @param {string} containerIn container to be used
+ * @param {string} m month
+ * @param {string} y year
+ */
 function createPage(containerIn,m,y){
     var arr = ["January","February","March","April","May","June","July",
         "August","September","October","November","December"];
@@ -96,114 +104,133 @@ function createPage(containerIn,m,y){
 
 }
 
-//sets the labels for mm, dd, yyyy
+
+/**
+ *  Sets the labels for mm, dd, yyyy
+ * @param {integer} m month.
+ * @param {integer} d day.
+ * @param {integer} y year.
+ */
 function setLabels(m,d,y){
     document.getElementById("month-year").innerHTML = m+" "+y;
 }
 
-
-//hides the calendar based on table id
+/**
+ *  Hides the calendar based on table id.
+ * @param {string} idIn table id.
+ */
 function hideCal(idIn) {
     document.getElementById(idIn).style.display = "none";
 }
 
-//shows the calendar based on table id
+/**
+ *  Shows the calendar based on table id.
+ * @param {string} idIn table id.
+ */
 function showCal(idIn) {
     document.getElementById(idIn).style.display = "block";
 }
 
-
-// decrement month and hide future calendar
+/**
+ *  Decrement month and hide future calendar.
+ */
 function prev() {
     var arr = ["January","February","March","April","May","June","July",
         "August","September","October","November","December"];
     //hide current calendar
-    hideCal('table'+currMonth+'-'+currYear);
+    hideCal('table'+CalLib.currMonth+'-'+CalLib.currYear);
 
     //decrement month, if month is jan, change to dec
-    if(currMonth ==1){
-        currMonth = 12;
+    if(CalLib.currMonth ==1){
+        CalLib.currMonth = 12;
         //decrement year
-        currYear--;
+        CalLib.currYear--;
     } else {
-        currMonth--;
+        CalLib.currMonth--;
     }
 
-    var tmpTable = document.getElementById('table'+currMonth+'-'+currYear);
+    var tmpTable = document.getElementById('table'+CalLib.currMonth+'-'+CalLib.currYear);
     if(tmpTable){
         showCal(tmpTable.id);
     } else {
-        createPage('calContainer',currMonth,currYear);
+        createPage('calContainer',CalLib.currMonth,CalLib.currYear);
     }
-    setLabels(arr[currMonth-1],daysInMonth(currMonth,currYear),currYear);
+    setLabels(arr[CalLib.currMonth-1],daysInMonth(CalLib.currMonth,CalLib.currYear),CalLib.currYear);
 
 }
 
-// increment month and hide past calendar
+/**
+ *  Increment month and hide past calendar.
+ */
 function nxt() {
     var arr = ["January","February","March","April","May","June","July",
         "August","September","October","November","December"];
     //hide current calendar
-    hideCal('table'+currMonth+'-'+currYear);
+    hideCal('table'+CalLib.currMonth+'-'+CalLib.currYear);
 
     //increment month, if month is dec, change to jan
-    if(currMonth ==12){
-        currMonth = 1;
+    if(CalLib.currMonth ==12){
+        CalLib.currMonth = 1;
         //decrement year
-        currYear++;
+        CalLib.currYear++;
     } else {
-        currMonth++;
+        CalLib.currMonth++;
     }
 
-    var tmpTable = document.getElementById('table'+currMonth+'-'+currYear);
+    var tmpTable = document.getElementById('table'+CalLib.currMonth+'-'+CalLib.currYear);
     //if table exists, show table.  Otherwise create table
     if(tmpTable){
         showCal(tmpTable.id);
     } else {
-        createPage('calContainer',currMonth,currYear);
+        createPage('calContainer',CalLib.currMonth,CalLib.currYear);
     }
-    setLabels(arr[currMonth-1],daysInMonth(currMonth,currYear),currYear);
+    setLabels(arr[CalLib.currMonth-1],daysInMonth(CalLib.currMonth,CalLib.currYear),CalLib.currYear);
 
 }
 
-// changes google calendar button visibility
+/**
+ * Changes google calendar button visibility
+ */
 function submitCalVisibility(){
-    if(subject.length != 0){
+    if(CalLib.subject.length != 0){
         document.getElementById('authorize-button').disabled = false;
     } else {
         document.getElementById('authorize-button').disabled = true;
     }
 }
 
-//changes the color of item clicked and appends/removes item to list
-function colorChange(id){
+/**
+ *  Changes the color of item clicked and appends/removes item to/from list.
+ * @param {string} idIn id of element.
+ */
+function colorChange(idIn){
 
     var colors = new Array;
     colors = ["#0099CC","#007E33","#FF8800","#CC0000","#9933CC"];
 
-    if(currColor != undefined) {
+    if(CalLib.currColor != undefined) {
         //sets the background color var
-        var index = dateList.indexOf(id.substring(3));
+        var index = CalLib.dateList.indexOf(idIn.substring(3));
 
-        var background = document.getElementById(id).style;
+        var background = document.getElementById(idIn).style;
 
         //if the item is blank, create and push new array items
         if (background.backgroundColor == "black") {
             //2018-03-22 date format
-            dateList.push(id.substring(3));
-            subject.push(titleInput);
-            startTime.push(timeStart);
-            endTime.push(timeEnd);
+            CalLib.dateList.push(idIn.substring(3));
+            CalLib.subject.push(CalLib.titleInput);
+            CalLib.startTime.push(CalLib.timeStart);
+            CalLib.endTime.push(CalLib.timeEnd);
             //change color of button
-            background.backgroundColor = colors[currColor];
+            background.backgroundColor = colors[CalLib.currColor];
         } else {//otherwise if it is not black and filled.
 
             if (index !== -1) {
                 //remove from list
-                dateList.splice(index, 1);
-                subject.splice(index, 1);
-                startTime.splice(index, 1);
-                endTime.splice(index, 1);
+                CalLib.dateList.splice(index, 1);
+                CalLib.subject.splice(index, 1);
+                CalLib.startTime.splice(index, 1);
+                CalLib.endTime.splice(index, 1);
             }
             background.backgroundColor = "black";
 
@@ -213,8 +240,15 @@ function colorChange(id){
     submitCalVisibility();
 }
 
-// highlights current shift/time and un-highlights others
+
+/**
+ *  Highlights current shift/time and un-highlights others.
+ * @param {string} idIn id of element.
+ */
 function highlightShift(idIn) {
+
+    var btnId = new Array;
+    btnId = ["shift1","shift2","shift3","shift4","shift5"];
 
     // index for the btn id
     var index = btnId.indexOf(idIn);
@@ -226,10 +260,10 @@ function highlightShift(idIn) {
     var numHighlightBtn = document.getElementsByClassName('btn-time').length;
 
     // set current variables
-    currColor = index;
-    timeStart = document.getElementById('start-time'+adjustedIndex).innerHTML;
-    timeEnd = document.getElementById('end-time'+adjustedIndex).innerHTML;
-    titleInput = document.getElementById('shift'+adjustedIndex).innerHTML;
+    CalLib.currColor = index;
+    CalLib.timeStart = document.getElementById('start-time'+adjustedIndex).innerHTML;
+    CalLib.timeEnd = document.getElementById('end-time'+adjustedIndex).innerHTML;
+    CalLib.titleInput = document.getElementById('shift'+adjustedIndex).innerHTML;
 
     //set tmpbtn to the id and set opacity to 1
     var tmpbtn = document.getElementById(idIn);
@@ -244,7 +278,10 @@ function highlightShift(idIn) {
     }
 }
 
-//  displays the submission confirmation modal
+
+/**
+ *  Displays the submission confirmation modal.
+ */
 function confirmModal(){
     var modal = document.getElementById("calModal");
     var modalTitle = document.getElementById("modal-title");
@@ -253,12 +290,12 @@ function confirmModal(){
     modalTitle.innerHTML = "Submitted Success!";
 
     // loop over list and post 
-    var listLen = dateList.length;
+    var listLen = CalLib.dateList.length;
     for (var i = 0; i < listLen; i++){
-        text += ("<br>" + "Title: " + subject[i]
-                + " Start Time: " + startTime[i]
-                + " End Time: " + endTime[i]
-                + " Date: "+ dateList[i]
+        text += ("<br>" + "Title: " + CalLib.subject[i]
+                + " Start Time: " + CalLib.startTime[i]
+                + " End Time: " + CalLib.endTime[i]
+                + " Date: "+ CalLib.dateList[i]
                 + "&#13;&#10;");
     }
     modalMessage.innerHTML = text;
@@ -266,7 +303,9 @@ function confirmModal(){
     modal.style.display = "block";
 }
 
-// closes the submission confirmation modal
+/**
+ *  Hides the submission confirmation modal.
+ */
 function closeModal(){
     var modal = document.getElementById("calModal");
     modal.style.display = "none";
