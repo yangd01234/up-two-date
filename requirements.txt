@@ -1,0 +1,21 @@
+certifi==2019.6.16
+chardet==3.0.4
+Django==2.2.2
+django-crispy-forms==1.7.2
+gunicorn==19.9.0
+idna==2.8
+pytz==2019.1
+requests==2.22.0
+sqlparse==0.3.0
+urllib3==1.25.3
+(test) 10-197-36-223:up-two-date Derek$ pip freeze
+certifi==2019.6.16
+chardet==3.0.4
+Django==2.2.2
+django-crispy-forms==1.7.2
+gunicorn==19.9.0
+idna==2.8
+pytz==2019.1
+requests==2.22.0
+sqlparse==0.3.0
+urllib3==1.25.3
