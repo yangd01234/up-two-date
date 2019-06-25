@@ -2,7 +2,6 @@
 var CLIENT_ID = GOOG_CAL_CLIENT_ID;
 var API_KEY = GOOG_API_KEY;
 
-
 // Array of API discovery doc URLs for APIs used by the quickstart
 var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
 

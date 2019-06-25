@@ -1,7 +1,7 @@
 {
-    "SECRET_KEY": "(7qFx$,k+mP,A5G,MZ<u-:cRhmt_PL:&;4/z_N]DM5=c,s$,eC",
-    "EMAIL_USER": "noreplyuptwodate@gmail.com",
-    "EMAIL_PASS": "mfzfqxhogkmtlpyz",
-    "GOOG_CAL_CLIENT_ID": "177067354745-993n4empemarpoh951inqrqjga5cnhls.apps.googleusercontent.com",
-    "GOOG_API_KEY": "AIzaSyCUBGIs1w9KuanqU3fzicZ660rO8ZdYdTo"
+    "SECRET_KEY": "",
+    "EMAIL_USER": "",
+    "EMAIL_PASS": "",
+    "GOOG_CAL_CLIENT_ID": "",
+    "GOOG_API_KEY": ""
 }
