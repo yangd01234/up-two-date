@@ -38,7 +38,6 @@
                 </a>
             </div>
         {% endfor %}
-        </p>
 
     <!-- Google Calendar API Button -->
     <h1>Submit to Google Calendar</h1>
@@ -54,6 +53,11 @@
         </div>
     </div>
     
+    <!-- masked config file -->
+    <script>
+        var GOOG_CAL_CLIENT_ID = '{{ GOOG_CAL_CLIENT_ID }}';
+        var GOOG_API_KEY = '{{ GOOG_API_KEY }}';
+    </script>
     <script type="text/javascript" src="{% static 'cal/script.js' %}"></script>
     <script type="text/javascript" src="{% static 'cal/cal_api.js' %}"></script>
     <script async defer src="https://apis.google.com/js/api.js"

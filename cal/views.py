@@ -4,27 +4,18 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Time
 from django.contrib import messages
+from django.conf import settings
 
 # homepage
 @login_required(login_url='/login/')
 def home(request):
     context = {
-        'c_save': Time.objects.all()
+        'c_save': Time.objects.filter(owner=request.user),
+        # mask google calendar information
+        'GOOG_CAL_CLIENT_ID': settings.GOOG_CAL_CLIENT_ID,
+        'GOOG_API_KEY': settings.GOOG_API_KEY
     }
     return render(request, 'cal/home.html', context)
-
-# class list based view to display saved times, inherits from ListView
-class TimeListView(LoginRequiredMixin, ListView):
-    model = Time
-    template_name = 'cal/home.html' # convention: <app>/<model>_<viewtype>.html
-
-    # filter for only current user's time
-    def get_queryset(self):
-        queryset = super(TimeListView, self).get_queryset()
-        queryset = queryset.filter(owner=self.request.user)
-        return queryset
-
-    context_object_name = 'c_save'
 
 # gives details on saved time
 class TimeDetailView(DetailView):
