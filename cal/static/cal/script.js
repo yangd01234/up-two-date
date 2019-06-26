@@ -45,13 +45,14 @@ function createPage(containerIn,m,y){
     var tr = document.createElement('tr');
     var tr2 = document.createElement('tr');
 
-    //if date is sunday (7) set to (0)
-    var fDay = new Date(y + "-" + m + "-01").getDay();
-    if (fDay == 7){
-        fDay = 0;
-    }
-    var lDay = new Date(y,m,0).getDate();
-    setLabels(arr[m-1],daysInMonth(m,y),y);
+    // First day in month, Sunday = 0
+    var fDay = new Date(m + "/01/" + y + " 00:00:00").getDay();
+
+    // number of days in month
+    var lDay = daysInMonth(m,y);
+    setLabels(arr[m-1],lDay,y);
+
+    // set id of new table
     newTable.id = "table"+m+"-"+y;
 
     //create the headers
@@ -69,8 +70,10 @@ function createPage(containerIn,m,y){
     // create calendar table
     for (i = 0; i < 42; i++) {
 
-        var tmpId = y + "-" + m + "-" + (i-fDay);
-        if (numCol > 6) {//create new rows if number of columns > 6
+        var tmpId = y + "-" + m + "-" + (i-fDay+1);
+
+        //create new rows if number of columns > 6
+        if (numCol > 6) {
             var newRow = newTable.insertRow(-1);
             numCol = 0;
             currRow++;
@@ -82,11 +85,11 @@ function createPage(containerIn,m,y){
         day.className = "calendar-td";
 
         //creates the blank days
-        if ((fDay+1 > i)) {
+        if ((fDay > i)) { // if fDay is greater than or = i, append empty day
             row.appendChild(day);
-        } else if (lDay+fDay < i){
+        } else if (lDay+fDay-1 < i){ // if lDay offset is < i, append empty day
             row.appendChild(day);
-        } else {//otherwise populates the days with a non blank
+        } else { // otherwise populates the days with a non blank
             var btn = document.createElement('button');
             btn.type = "button";
             btn.className = "calendar-btn";
@@ -94,7 +97,7 @@ function createPage(containerIn,m,y){
             btn.style.backgroundColor = "black";
             btn.id = "btn"+tmpId;//MAKE SURE to format for end of year
             btn.setAttribute('onClick', "colorChange(" + "'" + "btn"+tmpId + "')");
-            btn.innerHTML = (i - fDay);
+            btn.innerHTML = (i - fDay+1);
             day.appendChild(btn);
             row.appendChild(day);
         }
