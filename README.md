@@ -19,5 +19,4 @@ Derek Yang: [[LinkedIn](https://www.linkedin.com/in/yangd01234567/)]
 
 ## Cited Resources
 [[Corey Schafer Django Blog Tutorial](https://www.youtube.com/playlist?list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p)]
-
 [[Google Calendar Quickstart](https://developers.google.com/calendar/quickstart/js)]
