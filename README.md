@@ -15,6 +15,9 @@ $ pip install -r requirements.txt
 $ python manage.py runserver
 ```
 
+## Example Screenshot
+![image](https://drive.google.com/uc?export=view&id=1Mgrtxtn_a5bw4Xbd2mni3qcaWB-wXfjY)
+
 Derek Yang: [[LinkedIn](https://www.linkedin.com/in/yangd01234567/)]
 
 ## Cited Resources
